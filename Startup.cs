@@ -15,38 +15,41 @@ using Swashbuckle.AspNetCore.Swagger;
 
 
 
-namespace MemberServices
+namespace member_join_service
 {
-    
+
     public class Startup
     {
-        public IConfiguration Configuration {get;}
+        public IConfiguration Configuration { get; }
         //constractor 
-        public Startup(IConfiguration configuration)=> Configuration=configuration;
+        public Startup(IConfiguration configuration) => Configuration = configuration;
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MemberContext>
-            (opt=>opt.UseSqlServer(Configuration.GetConnectionString("MemberConnection")));
+            (opt => opt.UseSqlServer(Configuration.GetConnectionString("MemberConnection")));
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            // services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new Info { Title = "Join API", Version = "v1" });
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMvc();
-            
-           // Enable middleware to serve generated Swagger as a JSON endpoint.
-            //app.UseSwagger();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.
-            // app.UseSwaggerUI(c =>
-            // {
-            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            // });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Join API V1");
+            });
             // if (env.IsDevelopment())
             // {
             //     app.UseDeveloperExceptionPage();

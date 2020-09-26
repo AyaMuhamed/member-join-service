@@ -14,7 +14,26 @@ namespace MemberServices.Controllers
             _context=member;
         }
 
-        
+        // [HttpGet]
+        // public ActionResult<IEnumerable<Member>> getMembers()
+        // {
+             
+        //     return _context.Members;
+          
+        // }
+ 
+        // [HttpGet("{Id}")]
+        // public ActionResult<Member> getMember(int Id)
+        // {
+        //      Member member=_context.Members.Find(Id);
+        //      if(member==null)
+        //      {
+        //          return NotFound();
+        //      }
+        //     return member;
+          
+        }
+
         [HttpPost]
         public ActionResult<Member> addMember(Member member)
         {

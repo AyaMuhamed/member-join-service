@@ -11,7 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using MemberServices.Models;
+using Swashbuckle.AspNetCore;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using Microsoft.OpenApi.Models;
 
 
 
@@ -32,7 +35,7 @@ namespace member_join_service
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc("v1", new Info { Title = "Join API", Version = "v1" });
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Join API", Version = "v1" });
                 });
         }
 
